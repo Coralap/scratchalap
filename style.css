@@ -1,0 +1,192 @@
+/* --- Global Reset & Professional Sigma Standard --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background: #0D1117;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- Top Bar --- */
+.top-bar {
+    height: 60px;
+    width: 100%;
+    background: #161B22;
+    border-bottom: 2px solid #30363D;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    flex-shrink: 0;
+    -webkit-app-region: drag;
+}
+
+.logo-wrapper {
+    width: 60px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-app-region: no-drag;
+}
+
+#main-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.menu-container {
+    display: flex;
+    gap: 15px;
+    margin-left: 10px;
+    -webkit-app-region: no-drag;
+}
+
+.menu-item {
+    font-size: 14px;
+    color: #C9D1D9;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.menu-item:hover { color: #ffffff; }
+
+.window-drag-spacer { flex-grow: 1; height: 100%; }
+.window-controls { display: flex; height: 100%; -webkit-app-region: no-drag; }
+
+.control-btn {
+    width: 46px;
+    height: 100%;
+    border: none;
+    background: transparent;
+    color: #C9D1D9;
+    cursor: pointer;
+}
+
+.control-btn:hover { background-color: #30363D; }
+.control-btn.close:hover { background-color: #f85149; color: white; }
+
+/* --- Main Content Layout --- */
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden; 
+}
+
+/* --- Editor & Console Integrated Area --- */
+.editor-area {
+    flex: 1; 
+    display: flex;
+    flex-direction: column; /* Workspace on top, Console on bottom */
+    position: relative;
+    background: #0D1117;
+    overflow: hidden;
+}
+
+#blocklyDiv {
+    flex: 1; /* Workspace fills the top area */
+    width: 100%;
+}
+
+/* Console Panel - Pure black and full workspace width */
+
+.console-panel {
+    height: 200px;
+    width: calc(100% - 120px); 
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #000000;
+    border-top: 2px solid #30363D;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    z-index: 50 !important; 
+}
+
+
+
+.console-header {
+    background: #161B22;
+    color: #8B949E;
+    font-size: 11px;
+    padding: 6px 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #30363D;
+    letter-spacing: 0.05em;
+}
+
+#generatedCode {
+    padding: 10px;
+    color: #C9D1D9;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    overflow-y: auto; 
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    flex: 1;
+}
+
+/* --- Direct Blockly Overrides --- */
+.blocklyToolbox {
+    background-color: #0D1117 !important;
+    border-right: 2px solid #30363D !important;
+    width: 120px !important; /* Total Sidebar length */
+}
+
+.blocklyMainBackground {
+    fill: #0D1117 !important;
+}
+
+.blocklyFlyout {
+    transform: translate(120px, 0px) !important; /* Bridge the gap */
+}
+
+.blocklyFlyoutBackground {
+    fill: #161B22 !important;
+    fill-opacity: 1 !important;
+    stroke: #30363D !important;
+    stroke-width: 2px !important;
+}
+
+.blocklyTreeRow {
+    height: 45px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: transparent !important;
+}
+
+.blocklyTreeRow.blocklyToolboxSelected {
+    background-color: #161B22 !important;
+}
+
+.blocklyToolboxCategoryLabel {
+    color: #C9D1D9 !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 13px !important;
+}
+
+.blocklyScrollbarHandle {
+    fill: #27313d !important;
+}
+
+/* Direct targeting of the RUN button icon */
+.run_container > .blocklyImageField {
+    /* Pulls the image up. Adjust -2px to -3px until it's perfect */
+    transform: translate(55px,0.75px) !important; 
+}
+

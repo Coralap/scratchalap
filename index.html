@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML Editor - Engineered by The Sigma</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="top-bar">
+            <div class="logo-wrapper">
+                <img src="assets/logo.png" id="main-logo" alt="Logo">
+            </div>
+            <nav class="menu-container">
+                <div class="menu-item">File</div>
+                <div class="menu-item">View</div>
+                <div class="menu-item">Edit</div>
+                <div class="menu-item">Help</div>
+            </nav>
+            <div class="window-drag-spacer"></div>
+            <div class="window-controls">
+                <button id="minimize-btn" class="control-btn">—</button>
+                <button id="maximize-btn" class="control-btn">▢</button>
+                <button id="close-btn" class="control-btn close">✕</button>
+            </div>
+        </header>
+        <div class="main-content">
+            <main class="editor-area">
+                <div id="blocklyDiv"></div>
+                <footer class="console-panel">
+                    <div class="console-header">OUTPUT</div>
+                    <pre id="generatedCode">
+                    </pre>
+                </footer>
+            </main>
+        </div>
+    </div>
+    <script src="main.js" type="module"></script>
+</body>
+</html>

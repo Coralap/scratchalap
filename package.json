@@ -1,0 +1,46 @@
+{
+  "name": "scratchalap",
+  "version": "1.0.0",
+  "description": "Machine learning model editor and training environment built with Electron and Blockly.",
+  "author": "The Sigma",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "server": "python backend/server.py",
+    "vite": "vite",
+    "dev": "concurrently \"npm run server\" \"npm run vite\"",
+    "build": "vite build && electron-builder"
+  },
+  "build": {
+    "appId": "com.developer.ml-editor",
+    "productName": "ML-Editor",
+    "directories": {
+      "output": "release",
+      "app": "."
+    },
+  "files": [
+    "dist/**/*",
+    "dist-electron/**/*",
+    "public/**/*",
+    "backend/**/*", 
+    "package.json",
+    "!node_modules",
+    "!src",
+    "!release"
+  ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": "portable"
+    }
+  },
+  "dependencies": {
+    "blockly": "^12.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^39.2.7",
+    "electron-builder": "^24.13.3",
+    "vite": "^7.2.7",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.6"
+  }
+}
