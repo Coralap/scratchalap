@@ -122,7 +122,7 @@ export const toolbox =
               "shadow": {
                 "type": "math_number", 
                 "fields": {
-                  "NUM": 1 
+                  "NUM": 0.1 
                 }
               }
             }
