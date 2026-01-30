@@ -6,15 +6,25 @@ let pythonProcess = null;
 
 //build or test environment path to server.py
 function startPythonServer() {
+  const pythonExe = app.isPackaged 
+    ? path.join(process.resourcesPath, 'app', '.venv', 'Scripts', 'python.exe')
+    : path.join(__dirname, '..', '.venv', 'Scripts', 'python.exe');
+
   const serverPath = app.isPackaged 
     ? path.join(process.resourcesPath, 'app', 'backend', 'server.py')
     : path.join(__dirname, '..', 'backend', 'server.py');
 
+  console.log(`Launching Sigma Engine from: ${pythonExe}`);
 
-  pythonProcess = spawn('python', [serverPath]);
+  pythonProcess = spawn(pythonExe, [serverPath]);
 
-  pythonProcess.stdout.on('data', (data) => console.log(`Python Output: ${data}`));
-  pythonProcess.stderr.on('data', (data) => console.error(`Python Error: ${data}`));
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(`Python Output: ${data}`);
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`Python Error: ${data}`);
+  });
 
   pythonProcess.on('close', (code) => {
     console.log(`Python server exited with code ${code}`);

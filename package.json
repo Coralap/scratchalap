@@ -5,7 +5,7 @@
   "author": "The Sigma",
   "main": "dist-electron/main.js",
   "scripts": {
-    "server": "python backend/server.py",
+    "server": ".venv\\Scripts\\python backend/server.py",
     "vite": "vite",
     "dev": "concurrently \"npm run server\" \"npm run vite\"",
     "build": "vite build && electron-builder"
