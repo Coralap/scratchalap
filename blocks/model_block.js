@@ -31,7 +31,7 @@ export function registerModelBlock() {
     const model_name = block.getFieldValue('MODEL_NAME');
 
     const value = generator.statementToCode(block, 'LAYERS') || '""';
-    
+    generator.modelName = model_name;
     const code = `${model_name} = Sequential([\n${value}])\n`;
     
     return code;

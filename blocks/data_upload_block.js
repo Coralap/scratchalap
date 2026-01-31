@@ -30,7 +30,7 @@ export function registerDataUploadBlock() {
                 .appendField("Path:");
 
             this.setPreviousStatement(true);
-            this.setNextStatement(true);
+            this.setNextStatement(true,"dataframe");
             this.setColour("#2A2D34");
             this.setTooltip('Select a CSV file to load into a DataFrame');
         }

@@ -4,3 +4,4 @@ tensorflow
 pydantic
 python-multipart
 pandas
+scikit-learn

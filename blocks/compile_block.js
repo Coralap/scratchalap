@@ -58,12 +58,7 @@ export function registerCompileBlock() {
         const loss = block.getFieldValue('LOSS_NAME');
         const learning_rate = generator.valueToCode(block, 'LEARNING_RATE', generator.ORDER_ATOMIC) || '0.001';
         const metrics = block.getFieldValue('METRICS_NAME');
-        
-        let model_name = 'model'; 
-        const prevBlock = block.getPreviousBlock();
-        if (prevBlock && prevBlock.getFieldValue('MODEL_NAME')) {
-            model_name = prevBlock.getFieldValue('MODEL_NAME');
-        }
+        const model_name = generator.modelName;
 
         return `${model_name}.compile(optimizer=tf.keras.optimizers.get({'class_name': '${optimizer}', 'config': {'learning_rate': ${learning_rate}}}), loss='${loss}', metrics=['${metrics}'])\n`;
     };

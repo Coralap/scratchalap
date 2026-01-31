@@ -6,6 +6,8 @@ import { registerOutputSizeBlock } from './output_size_block.js';
 import { registerCompileBlock } from './compile_block.js';
 import { registerRunBlock } from './run_block.js';
 import { registerDataUploadBlock } from './data_upload_block.js';
+import { registerDataSplitBlock } from './data_split_block.js';
+import { registerFitBlock } from './fit_block.js';
 
 
 export function initBlocks() {
@@ -17,4 +19,6 @@ export function initBlocks() {
   registerCompileBlock();
   registerRunBlock();
   registerDataUploadBlock();
+  registerDataSplitBlock();
+  registerFitBlock();
 }

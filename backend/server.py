@@ -3,7 +3,8 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import sys, io, traceback, uvicorn
 import pandas as pd
-
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Input
