@@ -2,7 +2,26 @@ export const toolbox =
 {
   "kind": "categoryToolbox",
   "contents": [
-
+    {
+      "kind": "category",
+      "name": "Data",
+      "contents": [
+        {
+          "kind": "block",
+          "type": "upload_data",
+          "inputs": {
+            "VALUE": {
+              "shadow": {
+                "type": "text",
+                "fields": {
+                  "TEXT": "C:\\path\\to\\your\\data.csv"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     
     {
       "kind": "category",

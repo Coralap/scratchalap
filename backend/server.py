@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import sys, io, traceback, uvicorn
+import pandas as pd
 
 import tensorflow as tf
 from tensorflow.keras.models import Sequential

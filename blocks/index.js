@@ -5,6 +5,7 @@ import { registerInputSizeBlock } from './input_size_block.js';
 import { registerOutputSizeBlock } from './output_size_block.js';
 import { registerCompileBlock } from './compile_block.js';
 import { registerRunBlock } from './run_block.js';
+import { registerDataUploadBlock } from './data_upload_block.js';
 
 
 export function initBlocks() {
@@ -15,4 +16,5 @@ export function initBlocks() {
   registerOutputSizeBlock();
   registerCompileBlock();
   registerRunBlock();
+  registerDataUploadBlock();
 }
