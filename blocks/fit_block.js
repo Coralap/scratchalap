@@ -30,9 +30,13 @@ export function registerFitBlock() {
         const batchSize = generator.valueToCode(block, 'BATCH_SIZE', generator.ORDER_ATOMIC) || '32';
         
         return [
-            `print(f"\\n[TRAINING]: Training ${model_name} for ${epochs} epochs...")`,
-            `history = ${model_name}.fit(X, y, epochs=${epochs}, batch_size=${batchSize}, verbose=2)`,
-            `print("[TRAINING]: Complete. Final Loss:", round(history.history['loss'][-1], 4))`
+            // FIXED: Using single quotes on the outside to prevent the quote-clash
+            `print(f'\\n[TRAINING]: Starting ${model_name}...')`, 
+            `callbacks_list = [freq_callback] if 'freq_callback' in locals() else []`,
+            `v_mode = 0 if 'freq_callback' in locals() else 2`,
+            ``,
+            `history = ${model_name}.fit(X_train, y_train, epochs=${epochs}, batch_size=${batchSize}, verbose=v_mode, callbacks=callbacks_list)`,
+            `print(f"[TRAINING]: Complete. Final Accuracy: {history.history['accuracy'][-1]:.4f}")`
         ].join('\n') + '\n';
     };
 }

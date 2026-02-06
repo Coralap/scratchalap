@@ -32,7 +32,7 @@ export const toolbox = {
           "type": "input_size",
           "inputs": {
             "INPUT_SIZE": {
-              "shadow": { "type": "math_number", "fields": { "NUM": 1 } }
+              "shadow": { "type": "math_number", "fields": { "NUM": 13 } }
             }
           }
         },
@@ -41,7 +41,7 @@ export const toolbox = {
           "type": "dense_layer",
           "inputs": {
             "NEURONS": {
-              "shadow": { "type": "math_number", "fields": { "NUM": 1 } }
+              "shadow": { "type": "math_number", "fields": { "NUM": 32 } }
             }
           }
         },
@@ -59,7 +59,7 @@ export const toolbox = {
           "type": "compile",
           "inputs": {
             "LEARNING_RATE": {
-              "shadow": { "type": "math_number", "fields": { "NUM": 0.1 } }
+              "shadow": { "type": "math_number", "fields": { "NUM": 0.001 } }
             }
           }
         }
@@ -70,28 +70,29 @@ export const toolbox = {
       "name": "Train & Test",
       "colour": "#27ae60",
       "contents": [
+        { "kind": "block", "type": "fit_log_frequency" },
         {
           "kind": "block",
           "type": "fit",
           "inputs": {
             "EPOCHS": {
-              "shadow": { "type": "math_number", "fields": { "NUM": 10 } }
+              "shadow": { "type": "math_number", "fields": { "NUM": 100 } }
             },
             "BATCH_SIZE": {
               "shadow": { "type": "math_number", "fields": { "NUM": 32 } }
             }
           }
-        }
+        },
+        { "kind": "block", "type": "model_evaluate" }
       ]
     },
     {
       "kind": "category",
-      "name": "Variables",
-      "colour": "#4A90E2",
+      "name": "Inference",
+      "colour": "#3498db",
       "contents": [
-        { "kind": "block", "type": "math_number", "fields": { "NUM": 0 } },
-        { "kind": "block", "type": "text", "fields": { "TEXT": "" } },
-        { "kind": "block", "type": "logic_boolean", "fields": { "BOOL": "TRUE" } }
+        { "kind": "block", "type": "input_data" },
+        { "kind": "block", "type": "model_predict" } // New Predict block added here
       ]
     },
     {
@@ -100,6 +101,7 @@ export const toolbox = {
       "colour": "#D9534F",
       "contents": [
         { "kind": "block", "type": "run_container" },
+        { "kind": "block", "type": "plot_history" },
         {
           "kind": "block",
           "type": "print",
