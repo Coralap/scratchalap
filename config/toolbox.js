@@ -18,7 +18,8 @@ export const toolbox = {
             }
           }
         },
-        { "kind": "block", "type": "data_split" }
+        { "kind": "block", "type": "data_split" },
+        { "kind": "block", "type": "feature_map" }
       ]
     },
     {
@@ -27,6 +28,7 @@ export const toolbox = {
       "colour": "#5E4085",
       "contents": [
         { "kind": "block", "type": "model" },
+        { "kind": "block", "type": "load_model" },
         {
           "kind": "block",
           "type": "input_size",
@@ -45,6 +47,7 @@ export const toolbox = {
             }
           }
         },
+        { "kind": "block", "type": "dropout_layer" },
         {
           "kind": "block",
           "type": "output_size",
@@ -62,7 +65,9 @@ export const toolbox = {
               "shadow": { "type": "math_number", "fields": { "NUM": 0.001 } }
             }
           }
-        }
+        },
+        { "kind": "block", "type": "model_summary" },
+        { "kind": "block", "type": "save_model" }
       ]
     },
     {
@@ -92,7 +97,7 @@ export const toolbox = {
       "colour": "#3498db",
       "contents": [
         { "kind": "block", "type": "input_data" },
-        { "kind": "block", "type": "model_predict" } // New Predict block added here
+        { "kind": "block", "type": "model_predict" }
       ]
     },
     {

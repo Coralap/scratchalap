@@ -13,6 +13,16 @@ import { registerPlotBlock } from './plot_block.js';
 import { registerEvaluateBlock } from './model_evaluate_block.js';
 import { registerInputDataBlock } from './input_data_block.js';
 import { registerPredictBlock } from './model_predict_block.js';
+import { registerFeatureMapBlock } from './feature_map_block.js';
+import { registerModelSummaryBlock } from './model_summary_block.js';
+import { registerDropoutBlock } from './dropout_layer_block.js';
+
+import { registerSaveModelBlock } from './save_model_block.js';
+import { registerLoadModelBlock } from './load_model_block.js';
+
+
+
+
 
 export function initBlocks() {
   registerPrintBlock();
@@ -30,4 +40,9 @@ export function initBlocks() {
   registerEvaluateBlock();
   registerInputDataBlock();
   registerPredictBlock();
+  registerFeatureMapBlock();
+  registerModelSummaryBlock();
+  registerDropoutBlock();
+  registerSaveModelBlock();
+  registerLoadModelBlock();
 }

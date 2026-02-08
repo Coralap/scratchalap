@@ -84,12 +84,28 @@ app.on('window-all-closed', () => {
 
 
 
-ipcMain.handle('open-file-dialog', async () => {
+ipcMain.handle('open-file-dialog', async (event, type) => {
+  let filters = [];
+  
+  if (type === 'model') {
+    filters = [{ name: 'Keras Models', extensions: ['keras', 'h5'] }];
+  } else {
+    filters = [{ name: 'CSV Files', extensions: ['csv'] }];
+  }
+
   const result = await dialog.showOpenDialog({
     properties: ['openFile'],
-    filters: [{ name: 'CSV Files', extensions: ['csv'] }]
+    filters: filters
   });
   
   if (result.canceled) return null;
-  return result.filePaths[0]; // Returns the full path string
+  return result.filePaths[0];
+});
+
+ipcMain.handle('save-file-dialog', async (event, defaultName) => {
+  const { filePath } = await dialog.showSaveDialog({
+    defaultPath: defaultName,
+    filters: [{ name: 'Keras Models', extensions: ['keras', 'h5'] }]
+  });
+  return filePath;
 });

@@ -13,7 +13,7 @@ export function registerDataUploadBlock() {
                 16, 
                 "Browse", 
                 async () => {
-                    const filePath = await ipcRenderer.invoke('open-file-dialog');
+                    const filePath = await ipcRenderer.invoke('open-file-dialog', 'csv');
                     if (filePath) {
                         const targetBlock = this.getInputTargetBlock('VALUE');
                         targetBlock?.setFieldValue(filePath, 'TEXT');
