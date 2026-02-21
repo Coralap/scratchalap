@@ -36,13 +36,14 @@ export function registerSaveModelBlock() {
     };
 
     pythonGenerator.forBlock[BLOCK_TYPE] = (block, generator) => {
-        const model_name = generator.model_name || 'myModel';
+        const model_name = generator.activeModelName || 'myModel';
         const filename = block.getFieldValue('FILENAME');
         
         return [
             `# Save model to disk`,
+            `# Using raw string (r) for the path to handle Windows backslashes`,
             `${model_name}.save(r'${filename}')`,
-            `print(f"[SYSTEM]: Model saved successfully at: ${filename}")`
+            `print(fr"[SYSTEM]: Model saved successfully at: ${filename}")`
         ].join('\n') + '\n';
     };
 }

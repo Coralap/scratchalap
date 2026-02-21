@@ -52,6 +52,7 @@ export function registerDataSplitBlock() {
             ``,
             `X = df_processed.drop(columns=['${target}']).values.astype('float32')`,
             `y = df_processed['${target}'].values`,
+            `globals()['target_col'] = '${target}'`,
             ``,
             `X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=${testSize}, random_state=42)`,
             `print(f"[DATA]: Encoding & Split complete. Features shape: {X.shape}")`

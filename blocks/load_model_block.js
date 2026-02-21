@@ -43,8 +43,10 @@ export function registerLoadModelBlock() {
 
         return [
             `from tensorflow.keras.models import load_model`,
+            `# Load using raw string to handle backslashes`,
             `${model_name} = load_model(r'${filename}')`,
-            `print(f"[SYSTEM]: Successfully loaded model from ${filename}")`,
+            `# Use raw f-string (fr) to prevent unicode escape errors in print`,
+            `print(fr"[SYSTEM]: Successfully loaded model from: ${filename}")`,
             `${model_name}.summary()`
         ].join('\n') + '\n';
     };
