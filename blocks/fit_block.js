@@ -24,19 +24,33 @@ export function registerFitBlock() {
         }
     };
 
-    pythonGenerator.forBlock[BLOCK_TYPE] = (block, generator) => {
-        const model_name = generator.activeModelName || 'myModel';
-        const epochs = generator.valueToCode(block, 'EPOCHS', generator.ORDER_ATOMIC) || '10';
-        const batchSize = generator.valueToCode(block, 'BATCH_SIZE', generator.ORDER_ATOMIC) || '32';
-        
-        return [
-            // FIXED: Using single quotes on the outside to prevent the quote-clash
-            `print(f'\\n[TRAINING]: Starting ${model_name}...')`, 
-            `callbacks_list = [freq_callback] if 'freq_callback' in locals() else []`,
-            `v_mode = 0 if 'freq_callback' in locals() else 2`,
-            ``,
-            `history = ${model_name}.fit(X_train, y_train, epochs=${epochs}, batch_size=${batchSize}, verbose=v_mode, callbacks=callbacks_list)`,
-            `print(f"[TRAINING]: Complete. Final Accuracy: {history.history['accuracy'][-1]:.4f}")`
-        ].join('\n') + '\n';
-    };
+pythonGenerator.forBlock[BLOCK_TYPE] = (block, generator) => {
+    const model_name = generator.activeModelName || 'myModel';
+    const epochs = generator.valueToCode(block, 'EPOCHS', generator.ORDER_ATOMIC) || '10';
+    const batchSize = generator.valueToCode(block, 'BATCH_SIZE', generator.ORDER_ATOMIC) || '32';
+    
+    return [
+        `from sklearn.utils import class_weight`,
+        `import numpy as np`,
+        `class SigmaLogger(tf.keras.callbacks.Callback):`,
+        `    def on_epoch_end(self, epoch, logs=None):`,
+        `        if (epoch + 1) % 10 == 0 or epoch == 0:`,
+        `            # Dynamic log: prints all available metrics in the logs dictionary`,
+        `            metrics_str = " - ".join([f"{k}: {v:.4f}" for k, v in logs.items()])`,
+        `            print(f"Epoch {epoch+1}: {metrics_str}")`,
+        ``,
+        `freq_callback = SigmaLogger()`,
+        `print(f'\\n[TRAINING]: Starting ${model_name}...')`, 
+        `callbacks_list = [freq_callback]`,
+        `v_mode = 0`,
+        ``,
+        `weights = class_weight.compute_class_weight('balanced', classes=np.unique(y_train), y=y_train)`,
+        `cw_dict = {i: weights[i] for i in range(len(weights))}`,
+        `history = ${model_name}.fit(X_train, y_train, epochs=${epochs}, batch_size=${batchSize}, class_weight=cw_dict, verbose=v_mode, callbacks=callbacks_list)`,
+        ``,
+        `# Final summary of all metrics`,
+        `metrics_results = ", ".join([f"{k.capitalize()}: {v[-1]:.4f}" for k, v in history.history.items() if not k.startswith('val_')])`,
+        `print(f"[TRAINING]: Complete. {metrics_results}")`
+    ].join('\n') + '\n';
+};
 }

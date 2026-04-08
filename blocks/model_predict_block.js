@@ -20,12 +20,19 @@ export function registerPredictBlock() {
         const model_name = generator.activeModelName || 'myModel';
         
         return [
-            `raw_prediction = ${model_name}.predict(new_data, verbose=0)`,
+            `# Check if data needs normalization before prediction`,
+            `if 'scaler' in globals():`,
+            `    input_data = globals()['scaler'].transform(new_data)`,
+            `else:`,
+            `    input_data = new_data`,
+            ``,
+            `raw_prediction = ${model_name}.predict(input_data, verbose=0)`,
             `# Convert probability to class (0 or 1)`,
             `prediction_class = (raw_prediction > 0.5).astype("int32")[0][0]`,
             ``,
-            `if 'le' in locals():`,
-            `    result_text = le.inverse_transform([prediction_class])[0]`,
+            `if 'le' in locals() or 'le' in globals():`,
+            `    encoder = locals().get('le', globals().get('le'))`,
+            `    result_text = encoder.inverse_transform([prediction_class])[0]`,
             `else:`,
             `    result_text = str(prediction_class)`,
             ``,
